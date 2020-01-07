@@ -1,9 +1,8 @@
-package com.jeremythunell.examples.simplenumbergame;
+package com.jeremythunell.minmaxtree.examples.simplenumbergame;
 
-import com.jeremythunell.minmaxtree.MinMaxGameState;
+import com.jeremythunell.minmaxtree.minmaxtree.MinMaxGameState;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

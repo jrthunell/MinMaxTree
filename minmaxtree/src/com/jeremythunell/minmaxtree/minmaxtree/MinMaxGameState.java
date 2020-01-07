@@ -1,6 +1,5 @@
-package com.jeremythunell.minmaxtree;
+package com.jeremythunell.minmaxtree.minmaxtree;
 
-import java.util.List;
 import java.util.Map;
 
 public interface MinMaxGameState <ActionType> {

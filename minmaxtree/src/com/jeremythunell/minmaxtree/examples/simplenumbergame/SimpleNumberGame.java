@@ -1,8 +1,4 @@
-package com.jeremythunell.examples.simplenumbergame;
-
-import com.jeremythunell.minmaxtree.MinMaxGameState;
-
-import java.util.Map;
+package com.jeremythunell.minmaxtree.examples.simplenumbergame;
 
 /**
  * Makes a simple binary tree with the given numbers

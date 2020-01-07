@@ -1,15 +1,15 @@
-package com.jeremythunell.minmaxtree;
+package com.jeremythunell.minmaxtree.minmaxtree;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MinMaxTree<ActionType> {
     private MinMaxTreeNode<ActionType> root;
+    Map<MinMaxGameState<ActionType>,MinMaxGameState<ActionType>> existingNodes = new HashMap<>();
 
     private MinMaxTree(MinMaxTreeNode<ActionType> root) {
         this.root = root;
-        root.exploreNode();
+        root.exploreNode(existingNodes);
     }
 
     public static <T> MinMaxTree<T> minMaxTree(MinMaxGameState<T> root) {
@@ -29,11 +29,11 @@ public class MinMaxTree<ActionType> {
     private void exploreToDepth(int depth, Queue<MinMaxTreeNode<ActionType>> nodesToExplore){
         if(depth == 0){
             for(MinMaxTreeNode<ActionType> node : nodesToExplore)
-                node.exploreNode();
+                node.exploreNode(existingNodes);
         } else {
             Queue<MinMaxTreeNode<ActionType>> nextDepth = new LinkedList<>();
             for(MinMaxTreeNode<ActionType> node : nodesToExplore) {
-                nextDepth.addAll(node.exploreNode());
+                nextDepth.addAll(node.exploreNode(existingNodes));
             }
             exploreToDepth(depth - 1, nextDepth);
         }
@@ -47,7 +47,7 @@ public class MinMaxTree<ActionType> {
             MinMaxTreeNode<ActionType> node = toExplore.poll();
             if(!node.isExplored)
                 numExplored++;
-            toExplore.addAll(node.exploreNode());
+            toExplore.addAll(node.exploreNode(existingNodes));
         }
     }
 
@@ -56,7 +56,7 @@ public class MinMaxTree<ActionType> {
         toExplore.add(root);
         while(!toExplore.isEmpty()){
             MinMaxTreeNode<ActionType> node = toExplore.poll();
-            toExplore.addAll(node.exploreNode());
+            toExplore.addAll(node.exploreNode(existingNodes));
         }
     }
 
@@ -71,9 +71,12 @@ public class MinMaxTree<ActionType> {
         for(Map.Entry<MinMaxTreeNode<ActionType>, ActionType> child : root.actions.entrySet()){
             if(child.getValue().equals(action)){
                 this.root = child.getKey();
+                //System.out.println("did action: " + root + ": " + child.getValue() + " with value: " + root.getValue());
+                root.exploreNode(existingNodes);
+                //System.out.println("children: " + root.actions.entrySet().stream().map(x -> "\n" + x.getKey() + ": " + x.getValue()  + ": " + x.getKey().getValue()).collect(Collectors.toList()));
                 return;
             }
         }
-        throw new RuntimeException("Could not find a child node associated with action: " + action);
+        throw new IllegalArgumentException("Could not find a child node associated with action: " + action);
     }
 }

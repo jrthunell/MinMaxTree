@@ -1,7 +1,6 @@
-package com.jeremythunell.examples.tictactoe;
+package com.jeremythunell.minmaxtree.examples.tictactoe;
 
-import com.jeremythunell.minmaxtree.MinMaxTree;
-
+import com.jeremythunell.minmaxtree.minmaxtree.MinMaxTree;
 import java.util.Scanner;
 
 public class TicTacToe {

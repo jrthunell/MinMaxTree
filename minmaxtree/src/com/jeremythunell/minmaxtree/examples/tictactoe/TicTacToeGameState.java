@@ -1,8 +1,7 @@
-package com.jeremythunell.examples.tictactoe;
+package com.jeremythunell.minmaxtree.examples.tictactoe;
 
-import com.jeremythunell.minmaxtree.MinMaxGameState;
+import com.jeremythunell.minmaxtree.minmaxtree.MinMaxGameState;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

@@ -1,8 +1,7 @@
-package com.jeremythunell.minmaxtree;
+package com.jeremythunell.minmaxtree.minmaxtree;
 
 import com.sun.istack.internal.Nullable;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +37,9 @@ public abstract class MinMaxTreeNode <ActionType>{
 
     /**
      * Gets the children and updates the value of this node appropriately
+     * @param existingNodes
      */
-    protected abstract List<MinMaxTreeNode<ActionType>> exploreNode();
+    protected abstract List<MinMaxTreeNode<ActionType>> exploreNode(Map<MinMaxGameState<ActionType>, MinMaxGameState<ActionType>> existingNodes);
 
     /**
      * Gets the action associated with the min/max node's best value

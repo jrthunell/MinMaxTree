@@ -1,4 +1,4 @@
-package com.jeremythunell.minmaxtree;
+package com.jeremythunell.minmaxtree.minmaxtree;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,7 @@ public class MinNode<ActionType> extends MinMaxTreeNode<ActionType> {
     }
 
     @Override
-    protected List<MinMaxTreeNode<ActionType>> exploreNode() {
+    protected List<MinMaxTreeNode<ActionType>> exploreNode(Map<MinMaxGameState<ActionType>, MinMaxGameState<ActionType>> existingNodes) {
         if (this.isTerminal) {
             this.isExplored = true;
             return Collections.emptyList();
@@ -39,6 +39,12 @@ public class MinNode<ActionType> extends MinMaxTreeNode<ActionType> {
         double minValue = Double.MAX_VALUE;
         for (Map.Entry<MinMaxGameState<ActionType>, ActionType> child : this.gameState.getChildren().entrySet()) {
             MinMaxGameState<ActionType> childGameState = child.getKey();
+            if (existingNodes.containsKey(childGameState)) {
+                // if we've already seen a node, then just use the existing one to avoid unnecessary computation and loops
+                childGameState = existingNodes.get(childGameState);
+            } else {
+                existingNodes.put(childGameState, childGameState);
+            }
             ActionType action = child.getValue();
             MaxNode<ActionType> childNode = new MaxNode<>(childGameState, this);
             children.add(childNode);
@@ -51,7 +57,8 @@ public class MinNode<ActionType> extends MinMaxTreeNode<ActionType> {
         }
         this.children = children;
         this.isExplored = true;
-        parent.onChildUpdated();
+        if (parent != null)
+            parent.onChildUpdated();
         return children;
     }
 

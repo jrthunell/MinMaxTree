@@ -1,0 +1,18 @@
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+task listrepos {
+    doLast {
+        println "Repositories:"
+        project.repositories.each { println "Name: " + it.name + "; url: " + it.url }
+    }
+}
+test {
+    useJUnitPlatform()
+}
+
+subprojects {
+    version = '1.0'
+}
+

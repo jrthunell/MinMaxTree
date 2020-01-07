@@ -1,8 +1,8 @@
 package com.jeremythunell.minmaxtree;
 
-import com.jeremythunell.examples.simplenumbergame.SimpleNumberGame;
+import com.jeremythunell.minmaxtree.examples.simplenumbergame.SimpleNumberGame;
+import com.jeremythunell.minmaxtree.minmaxtree.MinMaxTree;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinMaxTreeTest {
