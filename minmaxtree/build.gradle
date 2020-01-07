@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+version '4.10.2'
+mainClassName = 'com.jeremythunell.examples.tictactoe.TicTacToe'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {    
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    compile 'com.github.bhlangonijr:chesslib:1.1.13'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    src {
+        java.srcDir file("src/")
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}

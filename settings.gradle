@@ -1,0 +1,4 @@
+include 'com.jeremythunell.minmaxtree.minmaxtree'
+include 'minmaxtree'
+
+rootProject.name = 'MinMaxTree'
